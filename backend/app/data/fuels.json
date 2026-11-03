@@ -1,0 +1,44 @@
+{
+  "methane": {
+    "name": "Methane (CH₄)",
+    "description": "Simplest hydrocarbon fuel, common baseline for microgravity combustion experiments (e.g. NASA ACME / FLEX).",
+    "molecular_weight": 16.04,
+    "heat_of_combustion_j_kg": 50.0e6,
+    "stoich_o2_ratio": 4.0,
+    "activation_energy_j_mol": 85000.0,
+    "pre_exponential": 1.2e7,
+    "diffusion_coeff": 2.2e-5,
+    "flame_temp_nominal_k": 2220.0,
+    "soot_propensity": "Low",
+    "typical_color_earth": "Blue base with orange-yellow tip in buoyancy",
+    "typical_color_zerog": "Dim spherical blue glow due to CH* chemiluminescence"
+  },
+  "hydrocarbon": {
+    "name": "Generic Hydrocarbon (C₃H₈-like)",
+    "description": "Representative higher hydrocarbon fuel with moderate soot formation propensity.",
+    "molecular_weight": 44.1,
+    "heat_of_combustion_j_kg": 46.4e6,
+    "stoich_o2_ratio": 3.64,
+    "activation_energy_j_mol": 92000.0,
+    "pre_exponential": 1.5e7,
+    "diffusion_coeff": 1.5e-5,
+    "flame_temp_nominal_k": 2250.0,
+    "soot_propensity": "Medium",
+    "typical_color_earth": "Bright yellow luminous soot flame",
+    "typical_color_zerog": "Soot agglomerates in outer shell; luminous ring"
+  },
+  "ethanol_vapor": {
+    "name": "Ethanol Vapor (C₂H₅OH)",
+    "description": "Oxygenated fuel with clean combustion characteristics, relevant for liquid droplet evaporation studies.",
+    "molecular_weight": 46.07,
+    "heat_of_combustion_j_kg": 26.8e6,
+    "stoich_o2_ratio": 2.08,
+    "activation_energy_j_mol": 78000.0,
+    "pre_exponential": 1.0e7,
+    "diffusion_coeff": 1.3e-5,
+    "flame_temp_nominal_k": 2190.0,
+    "soot_propensity": "Very Low",
+    "typical_color_earth": "Pale blue with minimal soot luminosity",
+    "typical_color_zerog": "Uniform pale blue spherical shell"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "earth": {
+    "id": "earth",
+    "name": "Earth Surface (1.0 g)",
+    "gravity_g": 1.0,
+    "gravity_ms2": 9.80665,
+    "default_o2_percent": 20.95,
+    "default_pressure_kpa": 101.325,
+    "description": "Standard terrestrial gravity. Strong buoyancy forces generate natural convection, causing hot gases to rise rapidly and pulling ambient air inward at the flame base.",
+    "dominant_regime": "Buoyancy-dominated natural convection"
+  },
+  "mars": {
+    "id": "mars",
+    "name": "Mars Gravity (0.38 g)",
+    "gravity_g": 0.38,
+    "gravity_ms2": 3.71,
+    "default_o2_percent": 20.95,
+    "default_pressure_kpa": 101.325,
+    "description": "Reduced Martian gravitational acceleration (simulated in experimental habitat). Buoyant upward velocity is reduced by ~38%, resulting in wider flame geometry and lower convective cooling.",
+    "dominant_regime": "Mixed convection-diffusion"
+  },
+  "moon": {
+    "id": "moon",
+    "name": "Lunar Gravity (0.165 g)",
+    "gravity_g": 0.165,
+    "gravity_ms2": 1.62,
+    "default_o2_percent": 20.95,
+    "default_pressure_kpa": 101.325,
+    "description": "Lunar habitat gravity (~1/6th Earth). Buoyancy is sluggish; molecular diffusion begins to govern species transport away from the reaction zone.",
+    "dominant_regime": "Weak buoyancy, diffusion-transition"
+  },
+  "microgravity": {
+    "id": "microgravity",
+    "name": "Orbital Microgravity (~10⁻⁴ g)",
+    "gravity_g": 0.0001,
+    "gravity_ms2": 0.00098,
+    "default_o2_percent": 20.95,
+    "default_pressure_kpa": 101.325,
+    "description": "Orbiting spacecraft / ISS environment. Buoyant convection vanishes; combustion forms a quiet spherical diffusion flame dependent purely on molecular diffusion or forced spacecraft ventilation.",
+    "dominant_regime": "Diffusion-dominated (or forced ventilation)"
+  },
+  "artemis_cabin": {
+    "id": "artemis_cabin",
+    "name": "Exploration Atmosphere (34% O₂ @ 56 kPa)",
+    "gravity_g": 0.0001,
+    "gravity_ms2": 0.00098,
+    "default_o2_percent": 34.0,
+    "default_pressure_kpa": 56.0,
+    "description": "NASA Exploration Atmosphere for next-generation Artemis spacecraft (reduced pressure, elevated oxygen to minimize EVA pre-breathe time while testing flammability margins).",
+    "dominant_regime": "Elevated-O2 microgravity diffusion"
+  }
+}

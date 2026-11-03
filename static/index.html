@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZeroG Flames — Microgravity Combustion Simulator | NASA Space Apps Challenge</title>
+  <meta name="description" content="Interactive 2D scientific combustion simulator and educational laboratory exploring buoyancy, oxygen transport, and spacecraft fire safety from Earth to microgravity." />
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/static/css/styles.css" />
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="header-nav">
+    <div class="brand-container">
+      <img src="/static/assets/zerog-team-logo.jpg" alt="ZeroG Flames Team Logo" class="team-logo-img" />
+      <div class="brand-text">
+        <h1>ZeroG FLAMES</h1>
+        <div class="brand-badge">
+          <span>NASA SPACE APPS CHALLENGE</span>
+          <span>•</span>
+          <span>MICROGRAVITY COMBUSTION</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-links">
+      <button class="nav-tab active" data-target="homePage" id="tabHome">🏠 Home</button>
+      <button class="nav-tab" data-target="labPage" id="tabLab">🔬 Zero-G Lab</button>
+      <button class="nav-tab" data-target="comparePage" id="tabCompare">⚖️ Compare (1g vs 0g)</button>
+      <button class="nav-tab" data-target="experimentsPage" id="tabExperiments">📊 Experiments</button>
+      <button class="nav-tab" data-target="sciencePage" id="tabScience">📚 Science Hub</button>
+      <button class="nav-tab" data-target="safetyPage" id="tabSafety">🛡️ Spacecraft Safety</button>
+    </nav>
+
+    <div class="header-meta">
+      <button class="btn-secondary" id="assumptionsBtn" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;">📋 Assumptions</button>
+      <span class="model-badge">v1.0.0 Reduced-Order</span>
+      <img src="/static/assets/nasa-space-apps-logo.svg" alt="NASA Space Apps Challenge Logo" class="nasa-logo-img" />
+    </div>
+  </header>
+
+  <!-- ==========================================
+       PAGE 1: HOME (Hero & Scientific Overview)
+       ========================================== -->
+  <main id="homePage" class="page-view active">
+    <section class="hero-section">
+      <div class="hero-badge">
+        <span>🚀 NASA SPACE APPS CHALLENGE 2026</span>
+        <span>•</span>
+        <span>MICROGRAVITY PHYSICS</span>
+      </div>
+      <h1 class="hero-title">ZERO-G FLAMES</h1>
+      <h2 class="hero-subtitle">Fire without gravity.</h2>
+      <p class="hero-desc">
+        Explore how reduced gravity alters buoyancy, natural convection, oxygen transport, and flame morphology — from Earth surface to orbital microgravity and spacecraft habitats.
+      </p>
+
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="window.app.switchPage('labPage')">
+          <span>🔬 ENTER THE ZERO-G LAB</span>
+          <span>→</span>
+        </button>
+        <button class="btn-secondary" onclick="window.app.switchPage('sciencePage')">
+          <span>📚 EXPLORE THE SCIENCE</span>
+        </button>
+        <button class="btn-secondary" onclick="window.app.switchPage('comparePage')">
+          <span>⚖️ EARTH VS MICROGRAVITY</span>
+        </button>
+      </div>
+
+      <!-- Core Scientific Chain -->
+      <div class="science-chain">
+        <div class="chain-step">Gravity (g)</div>
+        <div class="chain-arrow">→</div>
+        <div class="chain-step">Buoyancy Force (F_b)</div>
+        <div class="chain-arrow">→</div>
+        <div class="chain-step">Natural Convection</div>
+        <div class="chain-arrow">→</div>
+        <div class="chain-step">Oxygen & Heat Transport</div>
+        <div class="chain-arrow">→</div>
+        <div class="chain-step">Combustion Behavior</div>
+        <div class="chain-arrow">→</div>
+        <div class="chain-step">Spacecraft Fire Safety</div>
+      </div>
+    </section>
+
+    <!-- Overview Highlights Grid -->
+    <div class="experiments-grid" style="margin-top: 2rem;">
+      <div class="sci-card">
+        <div class="card-header">
+          <span class="card-title">🔥 Buoyancy vs. Diffusion</span>
+          <span class="card-badge">PHYSICS</span>
+        </div>
+        <p style="font-size: 0.9rem; color: var(--text-secondary);">
+          On Earth, hot gases rise due to density differences, creating vigorous natural convection. In microgravity, this upward draft vanishes. Oxygen transport shifts entirely to slow molecular diffusion or forced spacecraft ventilation.
+        </p>
+      </div>
+
+      <div class="sci-card">
+        <div class="card-header">
+          <span class="card-title">🌐 Spherical Reaction Shells</span>
+          <span class="card-badge">OBSERVATION</span>
+        </div>
+        <p style="font-size: 0.9rem; color: var(--text-secondary);">
+          Without buoyant elongation, stationary flames in microgravity form calm, symmetrical spherical envelopes. Chemical reaction rates decrease, soot aggregates in outer boundaries, and cool flames can emerge.
+        </p>
+      </div>
+
+      <div class="sci-card">
+        <div class="card-header">
+          <span class="card-title">🛡️ Spacecraft Mission Safety</span>
+          <span class="card-badge">SAFETY</span>
+        </div>
+        <p style="font-size: 0.9rem; color: var(--text-secondary);">
+          Smoke does not rise to ceiling detectors in space. Fires can quietly smolder undetected in hidden equipment racks until forced ventilation currents suddenly deliver fresh oxygen.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- ==========================================
+       PAGE 2: ZERO-G LABORATORY (Centerpiece)
+       ========================================== -->
+  <main id="labPage" class="page-view">
+    <div class="lab-grid">
+      
+      <!-- Left Column: Environmental Controls -->
+      <aside class="sci-card">
+        <div class="card-header">
+          <span class="card-title">⚙️ Chamber Controls</span>
+          <span class="card-badge">INPUTS</span>
+        </div>
+
+        <!-- Presets -->
+        <label class="control-label" style="display:block; margin-bottom: 0.4rem;">Planetary Presets</label>
+        <div class="preset-grid">
+          <button class="preset-btn active" data-gravity="1.0" data-o2="20.95" data-pressure="101.325">
+            <strong>Earth Surface</strong>
+            <span class="preset-val">1.00 g (9.81 m/s²)</span>
+          </button>
+          <button class="preset-btn" data-gravity="0.38" data-o2="20.95" data-pressure="101.325">
+            <strong>Mars Gravity</strong>
+            <span class="preset-val">0.38 g (3.71 m/s²)</span>
+          </button>
+          <button class="preset-btn" data-gravity="0.165" data-o2="20.95" data-pressure="101.325">
+            <strong>Lunar Gravity</strong>
+            <span class="preset-val">0.165 g (1.62 m/s²)</span>
+          </button>
+          <button class="preset-btn" data-gravity="0.0001" data-o2="20.95" data-pressure="101.325">
+            <strong>Microgravity</strong>
+            <span class="preset-val">~10⁻⁴ g (Orbit/ISS)</span>
+          </button>
+          <button class="preset-btn" data-gravity="0.0001" data-o2="34.0" data-pressure="56.0" style="grid-column: span 2;">
+            <strong>Artemis Exploration Habitat</strong>
+            <span class="preset-val">34% O₂ @ 56 kPa (0.00 g)</span>
+          </button>
+        </div>
+
+        <!-- Gravity Slider -->
+        <div class="control-group">
+          <div class="control-label-row">
+            <span class="control-label">Gravitational Acceleration (g)</span>
+            <span class="control-value" id="gravityVal">1.00 g</span>
+          </div>
+          <input type="range" id="gravitySlider" class="control-slider orange-slider" min="0.0001" max="3.0" step="0.01" value="1.0" />
+          <div style="display:flex; justify-content:space-between; font-size: 0.7rem; color: var(--text-muted); margin-top: 0.2rem;">
+            <span>0.00 g (Micro-g)</span>
+            <span id="gravityMs2Val">9.81 m/s²</span>
+            <span>3.00 g</span>
+          </div>
+        </div>
+
+        <!-- Oxygen Slider -->
+        <div class="control-group">
+          <div class="control-label-row">
+            <span class="control-label">Oxygen Concentration (% vol)</span>
+            <span class="control-value" id="oxygenVal">21.0%</span>
+          </div>
+          <input type="range" id="oxygenSlider" class="control-slider" min="2.0" max="40.0" step="0.5" value="20.95" />
+          <div style="display:flex; justify-content:space-between; font-size: 0.7rem; color: var(--text-muted); margin-top: 0.2rem;">
+            <span>2% (Quench)</span>
+            <span>21% (Earth Norm)</span>
+            <span>40% (Enriched)</span>
+          </div>
+        </div>
+
+        <!-- Pressure Slider -->
+        <div class="control-group">
+          <div class="control-label-row">
+            <span class="control-label">Chamber Pressure (kPa)</span>
+            <span class="control-value" id="pressureVal">101.3 kPa</span>
+          </div>
+          <input type="range" id="pressureSlider" class="control-slider" min="20.0" max="200.0" step="1.0" value="101.325" />
+          <div style="display:flex; justify-content:space-between; font-size: 0.7rem; color: var(--text-muted); margin-top: 0.2rem;">
+            <span>20 kPa (Low)</span>
+            <span>101.3 kPa (1 atm)</span>
+            <span>200 kPa</span>
+          </div>
+        </div>
+
+        <!-- Forced Airflow Slider -->
+        <div class="control-group">
+          <div class="control-label-row">
+            <span class="control-label">Forced Cross-Ventilation (m/s)</span>
+            <span class="control-value" id="airflowVal">0.00 m/s</span>
+          </div>
+          <input type="range" id="airflowSlider" class="control-slider" min="-1.5" max="1.5" step="0.05" value="0.0" />
+          <div style="display:flex; justify-content:space-between; font-size: 0.7rem; color: var(--text-muted); margin-top: 0.2rem;">
+            <span>-1.5 m/s (Left)</span>
+            <span>0.0 (Quiescent)</span>
+            <span>+1.5 m/s (Right)</span>
+          </div>
+        </div>
+
+        <!-- Fuel Selector -->
+        <div class="control-group">
+          <div class="control-label-row">
+            <span class="control-label">Fuel Reactant</span>
+          </div>
+          <select id="fuelSelector" class="select-control">
+            <option value="methane">Methane (CH₄) — Clean Baseline</option>
+            <option value="hydrocarbon">Generic Hydrocarbon (C₃H₈-like)</option>
+            <option value="ethanol_vapor">Ethanol Vapor (C₂H₅OH)</option>
+          </select>
+        </div>
+
+        <!-- Run Simulation Button -->
+        <button id="runSimBtn" class="btn-control btn-run" style="width: 100%; justify-content: center; margin-top: 0.5rem; padding: 0.8rem;">
+          ⚡ Run Simulation
+        </button>
+      </aside>
+
+      <!-- Center Column: Simulation Chamber Canvas -->
+      <section class="chamber-container">
+        <div class="canvas-wrapper">
+          
+          <div class="canvas-overlay-badges">
+            <span id="transportRegimeBadge" class="status-badge" style="background: rgba(0,0,0,0.6); border: 1px solid var(--border-cyan); color: var(--cyan-glow);">
+              Buoyancy-Dominated Convection
+            </span>
+          </div>
+
+          <!-- HTML5 2D Scientific Canvas -->
+          <canvas id="simulationCanvas" width="480" height="480"></canvas>
+
+          <!-- Field Switcher Buttons -->
+          <div class="field-selector-bar">
+            <button class="field-btn active" data-field="flame">🔥 Flame Glow</button>
+            <button class="field-btn" data-field="temperature">🌡️ Temperature (T)</button>
+            <button class="field-btn" data-field="oxygen">🔵 Oxygen (Y_O₂)</button>
+            <button class="field-btn" data-field="fuel">🟡 Fuel (Y_F)</button>
+            <button class="field-btn" data-field="reaction">⚡ Reaction Rate (ω)</button>
+            <button class="field-btn" data-field="flow">💨 Velocity Field (u, v)</button>
+          </div>
+
+          <!-- Dynamic Scientific Colorbar -->
+          <div class="colorbar-container">
+            <span id="cbMin">293 K</span>
+            <div id="cbGradient" class="colorbar-gradient" style="background: linear-gradient(to right, #03060e, #00d2ff, #ff6b00);"></div>
+            <span id="cbMax">2200 K</span>
+          </div>
+        </div>
+
+        <!-- Simulation Timeline Playback Controls -->
+        <div class="sim-controls-bar">
+          <div style="display:flex; align-items:center; gap: 0.5rem;">
+            <button id="playPauseBtn" class="btn-control">▶ Play</button>
+            <button id="resetBtn" class="btn-control">🔄 Reset</button>
+          </div>
+
+          <div style="flex-grow: 1; display:flex; align-items:center; gap: 0.75rem; margin: 0 1rem;">
+            <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--text-muted);">Timeline:</span>
+            <input type="range" id="timelineSlider" class="control-slider" min="0" max="15" value="15" />
+          </div>
+
+          <div style="font-size: 0.85rem; font-family: var(--font-mono); color: var(--cyan-glow);" id="timeDisplay">
+            2.50 s
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Column: Live Metrics & Scientific Interpretation -->
+      <aside class="sci-card">
+        <div class="card-header">
+          <span class="card-title">📊 Live Diagnostics</span>
+          <span id="statusBadge" class="status-badge status-STABLE">STABLE</span>
+        </div>
+
+        <div class="metrics-grid">
+          <div class="metric-card" title="Peak combustion chamber temperature calculated by the 2D energy equation (Units: Kelvin). Model-derived quantity.">
+            <div class="metric-title">Peak Temp ℹ️</div>
+            <div class="metric-val" id="metricPeakTemp">2180.4 <span class="metric-unit">K</span></div>
+          </div>
+          <div class="metric-card" title="Maximum vector magnitude of combined forced airflow and buoyancy-driven gas velocity (Units: m/s). Model-derived quantity.">
+            <div class="metric-title">Max Gas Velocity ℹ️</div>
+            <div class="metric-val" id="metricVelocity">0.542 <span class="metric-unit">m/s</span></div>
+          </div>
+          <div class="metric-card" title="Integrated volumetric Arrhenius reaction rate across all computational grid cells (Units: kg/s). Model-derived quantity.">
+            <div class="metric-title">Total Reaction ℹ️</div>
+            <div class="metric-val" id="metricReaction">148.2 <span class="metric-unit">kg/s</span></div>
+          </div>
+          <div class="metric-card" title="Total mass rate of oxygen consumption based on stoichiometric fuel-to-oxygen ratio (Units: kg/s). Model-derived quantity.">
+            <div class="metric-title">O₂ Consumption ℹ️</div>
+            <div class="metric-val" id="metricO2Cons">592.8 <span class="metric-unit">kg/s</span></div>
+          </div>
+          <div class="metric-card" title="Peak upward acceleration resulting from Boussinesq density differential: F_b/rho = g * beta * (T - T_amb) (Units: m/s²).">
+            <div class="metric-title">Buoyant Force ℹ️</div>
+            <div class="metric-val" id="metricBuoyancy">68.2 <span class="metric-unit">m/s²</span></div>
+          </div>
+          <div class="metric-card" title="Total cross-sectional chamber area where reaction rate exceeds 5% of maximum front intensity (Units: cm²). Model-derived estimate.">
+            <div class="metric-title">Flame Area ℹ️</div>
+            <div class="metric-val" id="metricArea">12.4 <span class="metric-unit">cm²</span></div>
+          </div>
+        </div>
+
+        <div style="margin-top: 0.75rem; display: flex; gap: 0.5rem;">
+          <button id="exportDataBtn" class="btn-secondary" style="flex: 1; justify-content: center; font-size: 0.75rem; padding: 0.4rem 0.6rem;">
+            💾 Export Data (JSON)
+          </button>
+          <button id="exportCsvBtn" class="btn-secondary" style="flex: 1; justify-content: center; font-size: 0.75rem; padding: 0.4rem 0.6rem;">
+            📄 Export CSV
+          </button>
+        </div>
+
+        <!-- Dynamic Rule-Based Scientific Interpretation -->
+        <div class="interpretation-box">
+          <div class="interpretation-header">
+            <span>🔬 MODEL INTERPRETATION</span>
+          </div>
+          <p id="interpretationText">
+            At Earth-like gravity (1.00 g), strong buoyant forces generate vigorous natural convection. Hot combustion products rise rapidly, pulling fresh oxygen inward toward the flame base to sustain a high-intensity, elongated plume.
+          </p>
+        </div>
+
+        <!-- Context Callout -->
+        <div style="margin-top: 1rem; padding: 0.8rem; background: rgba(0,0,0,0.4); border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); font-size: 0.75rem; color: var(--text-muted);">
+          <strong>Note:</strong> Calculated via 2D advection-diffusion-reaction equations with Boussinesq body force coupling. Values reflect model predictions.
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- ==========================================
+       PAGE 3: COMPARE MODE (Earth vs Microgravity)
+       ========================================== -->
+  <main id="comparePage" class="page-view">
+    <div class="content-section" style="max-width: 1400px; padding: 1.5rem;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1rem;">
+        <div>
+          <h2>Earth vs. Microgravity Comparison</h2>
+          <p>Isolating gravity as the single experimental variable while maintaining identical fuel, oxygen, pressure, and ambient temperature.</p>
+        </div>
+        <button id="runCompareBtn" class="btn-primary" style="padding: 0.6rem 1.2rem; font-size: 0.85rem;">
+          🔄 Re-run Comparison
+        </button>
+      </div>
+
+      <div class="compare-container">
+        <!-- Condition A: Earth Surface -->
+        <div class="compare-card">
+          <div class="card-header">
+            <span class="card-title" style="color: #ff8c38;">🌍 Terrestrial Gravity (1.00 g)</span>
+            <span class="card-badge">BUOYANCY DOMINATED</span>
+          </div>
+          <canvas id="compareCanvasA" class="compare-canvas" width="400" height="400"></canvas>
+          <div style="font-size: 0.85rem; color: var(--text-secondary);">
+            <strong>Mechanism:</strong> Rapid buoyant upward flow draws ambient oxygen into the flame base, stretching the flame into a high-intensity vertical plume.
+          </div>
+        </div>
+
+        <!-- Condition B: Microgravity -->
+        <div class="compare-card">
+          <div class="card-header">
+            <span class="card-title" style="color: #00d2ff;">🛰️ Orbital Microgravity (0.00 g)</span>
+            <span class="card-badge">DIFFUSION DOMINATED</span>
+          </div>
+          <canvas id="compareCanvasB" class="compare-canvas" width="400" height="400"></canvas>
+          <div style="font-size: 0.85rem; color: var(--text-secondary);">
+            <strong>Mechanism:</strong> Zero buoyancy natural convection. Fuel and oxygen transport rely on molecular diffusion, producing a wider, spherical reaction envelope.
+          </div>
+        </div>
+      </div>
+
+      <!-- Delta Metrics Comparison Table -->
+      <div style="margin-top: 2rem;">
+        <h3 style="margin-bottom: 0.75rem;">Comparative Delta Breakdown</h3>
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; background: var(--bg-secondary); border-radius: var(--radius-md); overflow: hidden;">
+          <thead>
+            <tr style="background: rgba(15, 23, 42, 0.9); border-bottom: 1px solid var(--border-subtle); text-align: left;">
+              <th style="padding: 0.75rem 1rem;">Metric</th>
+              <th style="padding: 0.75rem 1rem; color: #ff8c38;">Earth (1.0 g)</th>
+              <th style="padding: 0.75rem 1rem; color: #00d2ff;">Microgravity (0.0 g)</th>
+              <th style="padding: 0.75rem 1rem;">Delta (Δ)</th>
+            </tr>
+          </thead>
+          <tbody id="compareDeltaTable">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="interpretation-box" style="margin-top: 1.5rem;">
+        <div class="interpretation-header">🔬 COMPARATIVE SYNTHESIS</div>
+        <p id="compareSummaryText">
+          Reducing gravity weakens the model's buoyancy-driven flow contribution. Oxygen and heat transport therefore become relatively more diffusion-dominated unless forced airflow is present.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- ==========================================
+       PAGE 4: EXPERIMENTS SUITE
+       ========================================== -->
+  <main id="experimentsPage" class="page-view">
+    <div style="max-width: 1400px; margin: 0 auto;">
+      <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">Interactive Scientific Experiments</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 2rem;">Automated parameter sweeps exploring gravity scaling and flammability extinction limits.</p>
+
+      <div class="experiments-grid">
+        
+        <!-- Experiment 1: Gravity Sweep -->
+        <div class="experiment-card">
+          <div>
+            <div class="card-header">
+              <span class="card-title">📈 Gravity Sweep Experiment</span>
+              <span class="card-badge">SWEEP</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+              Simulates combustion across 9 gravitational regimes from 1.0g to 0.0001g and plots buoyant flow velocity and peak temperature scaling.
+            </p>
+            <div class="chart-wrapper">
+              <canvas id="sweepChartCanvas" width="600" height="280"></canvas>
+            </div>
+            <div class="interpretation-box" style="margin-top: 0.75rem;">
+              <p id="sweepSummaryText" style="font-size: 0.8rem;">
+                Peak buoyant velocity scales with sqrt(g), causing buoyant convective transport to drop precipitously below 0.1 g.
+              </p>
+            </div>
+          </div>
+          <button id="runSweepBtn" class="btn-secondary" style="width: 100%; justify-content: center; margin-top: 1rem;">
+            🔄 Re-run Gravity Sweep
+          </button>
+        </div>
+
+        <!-- Experiment 2: Extinction Boundary (LOI) -->
+        <div class="experiment-card">
+          <div>
+            <div class="card-header">
+              <span class="card-title">🛑 Extinction Limit Mapping</span>
+              <span class="card-badge">FLAMMABILITY</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+              Sweeps ambient oxygen concentrations under microgravity to discover the model-predicted Limiting Oxygen Index (LOI) where combustion quenches.
+            </p>
+            <div class="chart-wrapper">
+              <canvas id="extinctionChartCanvas" width="600" height="280"></canvas>
+            </div>
+            <div class="interpretation-box" style="margin-top: 0.75rem;">
+              <p id="extinctionSummaryText" style="font-size: 0.8rem;">
+                Under 0.0001 g gravity, the model predicts self-sustaining combustion requires an oxygen concentration >= 10.0% by volume.
+              </p>
+            </div>
+          </div>
+          <button id="runExtinctionBtn" class="btn-secondary" style="width: 100%; justify-content: center; margin-top: 1rem;">
+            🔄 Re-run Extinction Sweep
+          </button>
+        </div>
+
+        <!-- Experiment 3: Microgravity + Ventilation (Airflow Sweep) -->
+        <div class="experiment-card">
+          <div>
+            <div class="card-header">
+              <span class="card-title">💨 Microgravity + Ventilation Experiment</span>
+              <span class="card-badge">VENTILATION</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+              Sweeps forced cross-ventilation velocities in near-zero gravity to prove that airflow dominates transport and flame asymmetry when buoyancy is absent.
+            </p>
+            <div class="chart-wrapper">
+              <canvas id="ventilationChartCanvas" width="600" height="280"></canvas>
+            </div>
+            <div class="interpretation-box" style="margin-top: 0.75rem;">
+              <p id="ventilationSummaryText" style="font-size: 0.8rem;">
+                Under microgravity (0.0001 g), natural buoyancy is absent. Forced ventilation drives directional species transport, stretching the reaction downstream.
+              </p>
+            </div>
+          </div>
+          <button id="runVentilationBtn" class="btn-secondary" style="width: 100%; justify-content: center; margin-top: 1rem;">
+            🔄 Re-run Ventilation Sweep
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ==========================================
+       PAGE 5: SCIENCE HUB
+       ========================================== -->
+  <main id="sciencePage" class="page-view">
+    <div class="content-section">
+      <h2>Scientific Principles of Microgravity Combustion</h2>
+      
+      <h3>1. What is Microgravity Combustion?</h3>
+      <p>
+        Combustion is a coupled thermo-chemical process governed by fluid motion, molecular diffusion, and chemical kinetics. On Earth, gravity produces buoyancy because hot combustion gases are significantly less dense than cold surrounding air. In microgravity, this buoyancy-driven convective draft vanishes, allowing fundamental molecular diffusion and chemistry to be observed without gravity-induced distortions.
+      </p>
+
+      <div class="info-alert">
+        <strong>The Scientific Chain:</strong> Gravity → Density-difference Buoyancy → Natural Convection → Altered Oxygen/Heat Transport → Flame Geometry & Extinction.
+      </div>
+
+      <h3>2. Why Gravity Doesn't "Pull Oxygen"</h3>
+      <p>
+        Gravity does not directly attract oxygen molecules to a flame. Instead, gravity exerts a downward body force on all gas molecules proportional to density ($\rho g$). Hot gases expanded by combustion have lower density than cold ambient air, resulting in a net upward buoyancy force that carries hot exhaust away and entrains fresh oxygen-rich air into the flame base.
+      </p>
+
+      <h3>3. Governing Transport Equations</h3>
+      <p>
+        ZeroG Flames models combustion using coupled 2D advection-diffusion-reaction conservation equations:
+      </p>
+
+      <div class="equation-box">
+        <strong>Oxygen Transport:</strong><br>
+        ∂Y_O2/∂t + <b>u</b> · ∇Y_O2 = D_O2 ∇²Y_O2 - s_O2 · ω<br><br>
+        <strong>Fuel Transport:</strong><br>
+        ∂Y_F/∂t + <b>u</b> · ∇Y_F = D_F ∇²Y_F - ω<br><br>
+        <strong>Energy Conservation:</strong><br>
+        ∂T/∂t + <b>u</b> · ∇T = α ∇²T + (Q · ω) / (ρ c_p) - L_loss<br><br>
+        <strong>Arrhenius Kinetics:</strong><br>
+        ω = A · Y_F · Y_O2 · exp(-E_a / (R · T))<br><br>
+        <strong>Boussinesq Buoyancy Flow:</strong><br>
+        <b>u</b>_total = <b>u</b>_forced + <b>u</b>_buoyancy, where F_b ∝ g · β · (T - T_amb)
+      </div>
+
+      <h3>4. Flame Color & Chemiluminescence</h3>
+      <p>
+        Flame colors are determined by two distinct physical mechanisms:
+      </p>
+      <ul style="margin-left: 1.5rem; color: var(--text-secondary); margin-bottom: 1rem;">
+        <li><strong>Blue Emission:</strong> Chemiluminescence from electronically excited radical species (such as CH* and C₂*) emitting discrete wavelengths (~431 nm and ~516 nm) during intense oxidation.</li>
+        <li><strong>Yellow/Orange Luminosity:</strong> Continuum thermal radiation from incandescent microscopic soot particles heated to high temperatures (1500–2000 K).</li>
+      </ul>
+      <p>
+        In microgravity, residence times are longer, soot aggregates into distinct concentric shells, and radiative cooling can initiate low-temperature "cool flame" regimes.
+      </p>
+
+      <h3>5. NASA Research Heritage</h3>
+      <p>
+        This simulator draws inspiration from microgravity experiments conducted aboard the International Space Station and drop towers:
+      </p>
+      <ul style="margin-left: 1.5rem; color: var(--text-secondary); margin-bottom: 1rem;">
+        <li><strong>FLEX (Flame Extinguishment Experiment):</strong> Studied droplet combustion and discovered self-sustaining low-temperature cool flames.</li>
+        <li><strong>ACME (Advanced Combustion via Microgravity Experiments):</strong> Investigated gaseous flame structure and soot formation on the ISS.</li>
+        <li><strong>SoFIE (Solid Fuel Ignition and Extinction):</strong> Evaluates material flammability for exploration spacecraft cabins.</li>
+      </ul>
+
+      <h3>6. Solid Fuel Pyrolysis & Wood Combustion Note</h3>
+      <p>
+        Solid fuels such as wood, composite polymers, or wiring insulation do not burn directly in their condensed solid phase. Instead, heat transfer from an ignition source drives an endothermic chemical decomposition process called <strong>pyrolysis</strong>:
+      </p>
+      <div class="info-alert" style="margin-bottom: 1rem;">
+        <strong>Pyrolysis Mechanism:</strong> Solid Material + Thermal Radiation → Char Residue + Tar + Combustible Volatiles (CO, H₂, Hydrocarbon Gases).
+      </div>
+      <p>
+        These released volatiles then mix with ambient oxygen in the gas phase where combustion actually occurs. Consequently, solid fuels require coupled phase-change, condensed-phase energy balances, and gasification physics beyond our present gaseous-fuel model. We explicitly model gaseous reactants (CH₄, C₃H₈-like, C₂H₅OH) rather than pretending gaseous kinetics can represent solid wood burning.
+      </p>
+
+      <h3>7. The Cool Flame Phenomenon & Droplet Studies (FLEX)</h3>
+      <p>
+        During NASA's FLEX experiments on the ISS, scientists observed liquid fuel droplets apparently "extinguishing," only for combustion to continue invisibly at significantly lower temperatures (600–900 K vs. typical 1800–2200 K).
+      </p>
+      <p>
+        These <strong>cool flames</strong> are sustained by low-temperature hydrocarbon reaction pathways involving peroxide radical chemistry. Without buoyant convection carrying away heat and reactants, these low-temperature reaction regimes can persist quietly in microgravity, posing unique detection challenges for spacecraft fire safety.
+      </p>
+
+      <h3>8. Model Assumptions & Explicit Limitations</h3>
+      <ul style="margin-left: 1.5rem; color: var(--text-secondary); line-height: 1.6;">
+        <li><strong>2D Cartesian Grid:</strong> Simulates a vertical cross-section of a 8 cm × 8 cm combustion chamber.</li>
+        <li><strong>Reduced-Order Fluid Dynamics:</strong> Implements a Boussinesq buoyancy body force coupled with lateral mass entrainment, rather than full 3D Navier-Stokes CFD.</li>
+        <li><strong>Single-Step Global Arrhenius Kinetics:</strong> Solves <code>Fuel + s·O₂ → Products + Heat</code> with flammability cutoff rather than hundreds of elementary radical elementary steps.</li>
+        <li><strong>Optically Thin Radiation:</strong> Radiation loss is approximated via Planck mean emission rather than full spectral radiative transfer equation (RTE) solving.</li>
+        <li><strong>Educational Purpose:</strong> Built to illustrate fundamental physical mechanisms and qualitative transitions between buoyancy-dominated and diffusion-dominated regimes; not certified for aerospace flight hardware signoff.</li>
+      </ul>
+    </div>
+  </main>
+
+  <!-- ==========================================
+       PAGE 6: SPACECRAFT SAFETY HUB
+       ========================================== -->
+  <main id="safetyPage" class="page-view">
+    <div class="content-section">
+      <h2>Spacecraft Fire Safety & Mission Architecture</h2>
+
+      <div class="info-alert">
+        <strong>Mission-Critical Reality:</strong> Fire in a sealed spacecraft represents one of the most hazardous catastrophic mission risks. The absence of gravity fundamentally alters how fires start, spread, and can be detected or extinguished.
+      </div>
+
+      <h3>1. The Detection Dilemma: Smoke Without Buoyancy</h3>
+      <p>
+        On Earth, smoke rises straight toward ceiling-mounted ionization and optical smoke detectors. In microgravity, smoke has no upward buoyant force. Particulate matter remains suspended and follows internal cabin ventilation air currents.
+      </p>
+      <p>
+        Consequently, spacecraft smoke detectors must be installed directly inside air return ducts, where airflow filters and monitors the entire cabin volume.
+      </p>
+
+      <h3>2. Quiescent Smoldering & Ventilation Shock</h3>
+      <p>
+        In unventilated spacecraft compartments, an accidental ignition may consume local oxygen and appear to extinguish, while silently smoldering at high temperature. If an astronaut or automated system activates cabin fans, the sudden influx of forced oxygen can cause explosive flame reactivation.
+      </p>
+
+      <h3>3. Artemis Exploration Atmospheres</h3>
+      <p>
+        Future lunar and deep-space missions (such as NASA's Artemis program) utilize Exploration Atmospheres (e.g. <strong>34% O₂ at 56 kPa / 8.2 psi</strong>) to minimize pre-breathe time before Extravehicular Activities (EVAs).
+      </p>
+      <p>
+        Elevated oxygen fractions significantly widen the flammability envelope of polymers and electrical components, making microgravity combustion modeling crucial for spacecraft material selection.
+      </p>
+    </div>
+  </main>
+
+  <!-- ==========================================
+       MODEL ASSUMPTIONS MODAL
+       ========================================== -->
+  <div id="assumptionsModal" class="modal-backdrop">
+    <div class="modal-box">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1rem;">
+        <h3 style="color: #ffffff; font-size: 1.2rem;">📋 Model Assumptions & Disclaimers</h3>
+        <button id="closeAssumptionsBtn" class="btn-control" style="padding: 0.2rem 0.5rem;">✕</button>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+        ZeroG Flames is a <strong>reduced-order educational combustion model</strong> designed to visualize the transition between buoyancy-dominated and diffusion-dominated transport.
+      </p>
+      <ul style="font-size: 0.85rem; color: var(--text-secondary); margin-left: 1.25rem; margin-bottom: 1rem; line-height: 1.6;">
+        <li>2D Cartesian finite-difference computational grid (64×64).</li>
+        <li>Reduced-order flow field combining Boussinesq buoyancy acceleration and forced cross-ventilation.</li>
+        <li>Single-step global Arrhenius chemical kinetics for gaseous fuels.</li>
+        <li>Linear species diffusion with pressure and temperature scaling.</li>
+        <li>Optically thin radiation loss approximation and ambient cooling.</li>
+        <li>Model predictions are educational and not certified CFD engineering standards.</li>
+      </ul>
+      <div style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--cyan-glow);">
+        Model Version: ZeroG Reduced-Order Combustion Model v1.0.0
+      </div>
+    </div>
+  </div>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-logos">
+      <img src="/static/assets/zerog-team-logo.jpg" alt="ZeroG Flames Logo" style="height: 50px; border-radius: 50%; border: 2px solid var(--cyan-glow);" />
+      <img src="/static/assets/nasa-space-apps-logo.svg" alt="NASA Space Apps Challenge Logo" style="height: 44px;" />
+    </div>
+    <p class="footer-text">
+      <strong>ZeroG Flames</strong> — NASA Space Apps Challenge Project.<br>
+      Exploring how gravity changes combustion. Fueling safer journeys to space.<br>
+      Developed with FastAPI, NumPy, and modern scientific Canvas visualization.
+    </p>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="/static/js/app.js"></script>
+</body>
+</html>
