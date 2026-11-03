@@ -233,7 +233,7 @@ export class SimulationRenderer {
     ctx.save();
     // Metal burner nozzle body
     ctx.fillStyle = '#1e293b';
-    ctx.strokeStyle = '#00d2ff';
+    ctx.strokeStyle = '#ff6320';
     ctx.lineWidth = 1.5;
     ctx.beginPath();
     ctx.arc(burnerCenterX, burnerCenterY, Math.max(4, burnerRadius), 0, Math.PI * 2);

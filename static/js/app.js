@@ -321,11 +321,11 @@ class ZeroGApp {
     if (mode === 'temperature') {
       minLabel.textContent = '293 K';
       maxLabel.textContent = '2200 K';
-      gradient.style.background = 'linear-gradient(to right, #0a1e78, #00d2ff, #10b981, #facc15, #ff6b00, #ffffff)';
+      gradient.style.background = 'linear-gradient(to right, #030303, #7a1a00, #cc4f1a, #ff6320, #ff9a00, #ffcc66)';
     } else if (mode === 'oxygen') {
       minLabel.textContent = '0.0 %';
       maxLabel.textContent = `${this.state.oxygen_percent.toFixed(1)} %`;
-      gradient.style.background = 'linear-gradient(to right, #040814, #0088cc, #00d2ff)';
+      gradient.style.background = 'linear-gradient(to right, #030303, #1a3a5c, #2d6a9f)';
     } else if (mode === 'fuel') {
       minLabel.textContent = '0.0';
       maxLabel.textContent = '1.0';
@@ -337,7 +337,7 @@ class ZeroGApp {
     } else {
       minLabel.textContent = 'Quiescent';
       maxLabel.textContent = 'High Activity';
-      gradient.style.background = 'linear-gradient(to right, #03060e, #00d2ff, #ff6b00)';
+      gradient.style.background = 'linear-gradient(to right, #030303, #cc4f1a, #ff6320)';
     }
   }
 
