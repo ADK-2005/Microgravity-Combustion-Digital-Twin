@@ -52,8 +52,8 @@ if STATIC_DIR.exists():
         # Serve static file if exists, otherwise fallback to index.html for SPA routing
         target_file = STATIC_DIR / full_path
         if full_path and target_file.is_file():
-            return FileResponse(target_file)
+            return FileResponse(target_file, headers={"Cache-Control": "no-cache, no-store, must-revalidate"})
         index_file = STATIC_DIR / "index.html"
         if index_file.exists():
-            return FileResponse(index_file)
+            return FileResponse(index_file, headers={"Cache-Control": "no-cache, no-store, must-revalidate"})
         return {"message": "ZeroG Flames API is active. Static frontend not yet compiled."}

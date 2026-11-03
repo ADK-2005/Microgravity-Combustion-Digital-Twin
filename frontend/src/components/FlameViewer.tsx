@@ -172,8 +172,8 @@ function renderBurner(ctx: CanvasRenderingContext2D, nx: number, ny: number, cel
   const cx = (nx / 2) * cellW;
   const cy = h - (ny / 10) * cellH;
   ctx.save();
-  ctx.fillStyle = '#1e293b';
-  ctx.strokeStyle = '#00d2ff';
+  ctx.fillStyle = '#181818';
+  ctx.strokeStyle = '#ff6320';
   ctx.lineWidth = 1.5;
   ctx.beginPath();
   ctx.arc(cx, cy, (nx / 24) * cellW, 0, Math.PI * 2);
