@@ -116,7 +116,7 @@ export const Laboratory: React.FC<LaboratoryProps> = ({
         <section className="chamber-container">
           <div className="canvas-wrapper">
             <div className="canvas-overlay-badges">
-              <span className="status-badge" style={{ background: 'rgba(0,0,0,0.6)', border: '1px solid var(--border-cyan)', color: 'var(--cyan-glow)' }}>
+              <span className="status-badge" style={{ background: 'rgba(0,0,0,0.6)', border: '1px solid var(--border-orange)', color: 'var(--orange-bright)' }}>
                 {metrics?.transport_regime || 'Buoyancy-Dominated Convection'}
               </span>
             </div>

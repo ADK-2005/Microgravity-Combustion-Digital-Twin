@@ -9,7 +9,7 @@ interface VelocityFieldProps {
 export const VelocityField: React.FC<VelocityFieldProps> = ({ maxVelocity, buoyancyStrength, airflow }) => {
   return (
     <div style={{ padding: '0.8rem', background: 'rgba(0,0,0,0.3)', borderRadius: '6px', border: '1px solid var(--border-subtle)', marginTop: '0.5rem' }}>
-      <div style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--cyan-glow)', marginBottom: '0.25rem' }}>
+      <div style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--orange-bright)', marginBottom: '0.25rem' }}>
         VELOCITY VECTOR SUPERPOSITION
       </div>
       <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>

@@ -47,7 +47,7 @@ export const Compare: React.FC = () => {
         <div className="compare-container">
           <div className="compare-card">
             <div className="card-header">
-              <span className="card-title" style={{ color: '#ff8c38' }}>🌍 Terrestrial Gravity (1.00 g)</span>
+              <span className="card-title" style={{ color: 'var(--orange-bright)' }}>🌍 Terrestrial Gravity (1.00 g)</span>
               <span className="card-badge">BUOYANCY DOMINATED</span>
             </div>
             <FlameViewer simulationData={condA} fieldMode="flame" width={400} height={400} />
@@ -58,7 +58,7 @@ export const Compare: React.FC = () => {
 
           <div className="compare-card">
             <div className="card-header">
-              <span className="card-title" style={{ color: '#00d2ff' }}>🛰️ Orbital Microgravity (0.00 g)</span>
+              <span className="card-title" style={{ color: 'var(--text-secondary)' }}>🛰️ Orbital Microgravity (0.00 g)</span>
               <span className="card-badge">DIFFUSION DOMINATED</span>
             </div>
             <FlameViewer simulationData={condB} fieldMode="flame" width={400} height={400} />

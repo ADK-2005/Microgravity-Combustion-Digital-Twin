@@ -37,7 +37,7 @@ export class ScientificChart {
     const maxTemp = Math.max(...points.map(p => p.peak_temperature_k), 2200);
 
     // Plot Line 1: Buoyancy Velocity (Cyan line)
-    ctx.strokeStyle = '#00d2ff';
+    ctx.strokeStyle = '#ff6320';
     ctx.lineWidth = 2.5;
     ctx.beginPath();
     points.forEach((p, idx) => {
@@ -52,7 +52,7 @@ export class ScientificChart {
     points.forEach(p => {
       const x = padL + (p.gravity_g / maxG) * plotW;
       const y = padT + plotH - (p.max_velocity_ms / maxVel) * plotH;
-      ctx.fillStyle = '#00d2ff';
+      ctx.fillStyle = '#ff6320';
       ctx.beginPath();
       ctx.arc(x, y, 4.5, 0, Math.PI * 2);
       ctx.fill();
@@ -86,7 +86,7 @@ export class ScientificChart {
     // Title / Legend
     ctx.textAlign = 'left';
     ctx.font = 'bold 11px Inter, sans-serif';
-    ctx.fillStyle = '#00d2ff';
+    ctx.fillStyle = '#ff6320';
     ctx.fillText('— Buoyant Velocity (m/s)', padL + 10, 20);
     ctx.fillStyle = '#ff8c38';
     ctx.fillText('--- Peak Temp (K)', padL + 160, 20);
@@ -211,7 +211,7 @@ export class ScientificChart {
     ctx.setLineDash([]);
 
     // Curve 1: Peak Flow Velocity (Cyan)
-    ctx.strokeStyle = '#00d2ff';
+    ctx.strokeStyle = '#ff6320';
     ctx.lineWidth = 2.5;
     ctx.beginPath();
     points.forEach((p, idx) => {
@@ -240,7 +240,7 @@ export class ScientificChart {
     points.forEach(p => {
       const x = padL + ((p.airflow_ms - minFlow) / flowRange) * plotW;
       const y = padT + plotH - (p.max_velocity_ms / maxVel) * plotH;
-      ctx.fillStyle = '#00d2ff';
+      ctx.fillStyle = '#ff6320';
       ctx.beginPath();
       ctx.arc(x, y, 4.5, 0, Math.PI * 2);
       ctx.fill();
@@ -255,10 +255,11 @@ export class ScientificChart {
 
     ctx.textAlign = 'left';
     ctx.font = 'bold 11px Inter, sans-serif';
-    ctx.fillStyle = '#00d2ff';
+    ctx.fillStyle = '#ff6320';
     ctx.fillText('— Flow Velocity (m/s)', padL + 10, 20);
     ctx.fillStyle = '#ff8c38';
     ctx.fillText('--- Total Reaction Rate', padL + 160, 20);
   }
 }
+
 

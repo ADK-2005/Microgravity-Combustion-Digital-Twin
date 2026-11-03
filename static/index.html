@@ -9,16 +9,16 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="/static/css/styles.css" />
+  <link rel="stylesheet" href="css/styles.css?v=2.0" />
 </head>
 <body>
 
   <!-- Top Navigation Bar -->
   <header class="header-nav">
     <div class="brand-container">
-      <img src="/static/assets/zerog-team-logo.jpg" alt="ZeroG Flames Team Logo" class="team-logo-img" />
+      <img src="assets/zerog-team-logo.jpg" alt="ZeroG Flames Team Logo" class="team-logo-img" />
       <div class="brand-text">
         <h1>ZeroG FLAMES</h1>
         <div class="brand-badge">
@@ -42,7 +42,7 @@
     <div class="header-meta">
       <button class="btn-secondary" id="assumptionsBtn" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;">📋 Assumptions</button>
       <span class="model-badge">v1.0.0 Reduced-Order</span>
-      <img src="/static/assets/nasa-space-apps-logo.svg" alt="NASA Space Apps Challenge Logo" class="nasa-logo-img" />
+      <img src="assets/nasa-space-apps-logo.svg" alt="NASA Space Apps Challenge Logo" class="nasa-logo-img" />
     </div>
   </header>
 
@@ -242,7 +242,7 @@
         <div class="canvas-wrapper">
           
           <div class="canvas-overlay-badges">
-            <span id="transportRegimeBadge" class="status-badge" style="background: rgba(0,0,0,0.6); border: 1px solid var(--border-cyan); color: var(--cyan-glow);">
+            <span id="transportRegimeBadge" class="status-badge" style="background: rgba(0,0,0,0.6); border: 1px solid var(--border-orange); color: var(--orange-bright);">
               Buoyancy-Dominated Convection
             </span>
           </div>
@@ -263,7 +263,7 @@
           <!-- Dynamic Scientific Colorbar -->
           <div class="colorbar-container">
             <span id="cbMin">293 K</span>
-            <div id="cbGradient" class="colorbar-gradient" style="background: linear-gradient(to right, #03060e, #00d2ff, #ff6b00);"></div>
+            <div id="cbGradient" class="colorbar-gradient" style="background: linear-gradient(to right, #030303, #7a1a00, #ff6320, #ff9a00);"></div>
             <span id="cbMax">2200 K</span>
           </div>
         </div>
@@ -280,7 +280,7 @@
             <input type="range" id="timelineSlider" class="control-slider" min="0" max="15" value="15" />
           </div>
 
-          <div style="font-size: 0.85rem; font-family: var(--font-mono); color: var(--cyan-glow);" id="timeDisplay">
+          <div style="font-size: 0.85rem; font-family: var(--font-mono); color: var(--orange-bright);" id="timeDisplay">
             2.50 s
           </div>
         </div>
@@ -379,7 +379,7 @@
         <!-- Condition B: Microgravity -->
         <div class="compare-card">
           <div class="card-header">
-            <span class="card-title" style="color: #00d2ff;">🛰️ Orbital Microgravity (0.00 g)</span>
+            <span class="card-title" style="color: var(--text-secondary);">🛰️ Orbital Microgravity (0.00 g)</span>
             <span class="card-badge">DIFFUSION DOMINATED</span>
           </div>
           <canvas id="compareCanvasB" class="compare-canvas" width="400" height="400"></canvas>
@@ -397,7 +397,7 @@
             <tr style="background: rgba(15, 23, 42, 0.9); border-bottom: 1px solid var(--border-subtle); text-align: left;">
               <th style="padding: 0.75rem 1rem;">Metric</th>
               <th style="padding: 0.75rem 1rem; color: #ff8c38;">Earth (1.0 g)</th>
-              <th style="padding: 0.75rem 1rem; color: #00d2ff;">Microgravity (0.0 g)</th>
+              <th style="padding: 0.75rem 1rem; color: var(--text-secondary);">Microgravity (0.0 g)</th>
               <th style="padding: 0.75rem 1rem;">Delta (Δ)</th>
             </tr>
           </thead>
@@ -647,7 +647,7 @@
         <li>Optically thin radiation loss approximation and ambient cooling.</li>
         <li>Model predictions are educational and not certified CFD engineering standards.</li>
       </ul>
-      <div style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--cyan-glow);">
+      <div style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--orange-bright);">
         Model Version: ZeroG Reduced-Order Combustion Model v1.0.0
       </div>
     </div>
@@ -656,8 +656,8 @@
   <!-- Site Footer -->
   <footer class="site-footer">
     <div class="footer-logos">
-      <img src="/static/assets/zerog-team-logo.jpg" alt="ZeroG Flames Logo" style="height: 50px; border-radius: 50%; border: 2px solid var(--cyan-glow);" />
-      <img src="/static/assets/nasa-space-apps-logo.svg" alt="NASA Space Apps Challenge Logo" style="height: 44px;" />
+      <img src="assets/zerog-team-logo.jpg" alt="ZeroG Flames Logo" style="height: 50px; border-radius: 50%; border: 2px solid var(--orange);" />
+      <img src="assets/nasa-space-apps-logo.svg" alt="NASA Space Apps Challenge Logo" style="height: 44px;" />
     </div>
     <p class="footer-text">
       <strong>ZeroG Flames</strong> — NASA Space Apps Challenge Project.<br>
@@ -667,6 +667,6 @@
   </footer>
 
   <!-- Scripts -->
-  <script type="module" src="/static/js/app.js"></script>
+  <script type="module" src="js/app.js?v=2.0"></script>
 </body>
 </html>

@@ -42,7 +42,7 @@ export const SimulationControls: React.FC<SimulationControlsProps> = ({
         />
       </div>
 
-      <div style={{ fontSize: '0.85rem', fontFamily: 'var(--font-mono)', color: 'var(--cyan-glow)' }}>
+      <div style={{ fontSize: '0.85rem', fontFamily: 'var(--font-mono)', color: 'var(--orange-bright)' }}>
         {currentTime.toFixed(2)} s
       </div>
     </div>
