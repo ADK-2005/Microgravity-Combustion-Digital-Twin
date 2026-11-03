@@ -8,7 +8,6 @@ from backend.app.physics.solver import CombustionSolver
 def test_solver_earth_vs_zerog_case():
     solver = CombustionSolver(grid_size=32)
     
-    # Run Case A: Earth Gravity 1.0 g
     res_earth = solver.run_simulation(
         gravity_g=1.0,
         oxygen_percent=21.0,
@@ -19,7 +18,6 @@ def test_solver_earth_vs_zerog_case():
         num_frames=5,
     )
     
-    # Run Case B: Microgravity ~ 0 g
     res_zerog = solver.run_simulation(
         gravity_g=0.0001,
         oxygen_percent=21.0,
@@ -30,17 +28,14 @@ def test_solver_earth_vs_zerog_case():
         num_frames=5,
     )
     
-    # Verify no NaNs
     temp_earth = np.array(res_earth["fields"]["temperature"])
     temp_zerog = np.array(res_zerog["fields"]["temperature"])
     assert not np.isnan(temp_earth).any()
     assert not np.isnan(temp_zerog).any()
     
-    # Buoyancy velocity in Earth must be substantially higher than in Microgravity
     assert res_earth["metrics"]["max_velocity_ms"] > res_zerog["metrics"]["max_velocity_ms"]
     assert res_earth["metrics"]["buoyancy_strength_ms2"] > res_zerog["metrics"]["buoyancy_strength_ms2"]
     
-    # Frames must be generated
     assert len(res_earth["frames"]) > 0
     assert len(res_zerog["frames"]) > 0
 
@@ -48,7 +43,6 @@ def test_solver_earth_vs_zerog_case():
 def test_solver_extinction_low_oxygen():
     solver = CombustionSolver(grid_size=32)
     
-    # 2% oxygen - subcritical
     res_quench = solver.run_simulation(
         gravity_g=1.0,
         oxygen_percent=2.0,
@@ -73,9 +67,7 @@ def test_solver_all_fuels():
 
 def test_solver_bidirectional_forced_airflow():
     solver = CombustionSolver(grid_size=32)
-    # Test positive airflow (left to right)
     res_pos = solver.run_simulation(airflow_ms=0.5, duration_s=0.3)
-    # Test negative airflow (right to left)
     res_neg = solver.run_simulation(airflow_ms=-0.5, duration_s=0.3)
     
     u_pos = np.array(res_pos["fields"]["velocity_u"])
@@ -89,9 +81,7 @@ def test_solver_bidirectional_forced_airflow():
 
 def test_solver_pressure_variations():
     solver = CombustionSolver(grid_size=32)
-    # Artemis habitat reduced pressure (56 kPa)
     res_low_p = solver.run_simulation(pressure_kpa=56.0, oxygen_percent=34.0, duration_s=0.3)
-    # Terrestrial pressure (101.325 kPa)
     res_norm_p = solver.run_simulation(pressure_kpa=101.325, oxygen_percent=21.0, duration_s=0.3)
     
     assert not np.isnan(np.array(res_low_p["fields"]["temperature"])).any()

@@ -11,12 +11,10 @@ from backend.app.physics.heat import solve_heat_transport
 
 def test_oxygen_diffusion_smooths_gradient():
     grid = SimulationGrid(nx=32, ny=32)
-    # Initialize a localized patch in oxygen inside the domain
     o2 = np.full((32, 32), 0.23)
     o2[14:18, 14:18] = 0.05
     initial_peak_diff = np.max(o2) - np.min(o2)
     
-    # Run diffusion without flow or reaction
     u = np.zeros_like(o2)
     v = np.zeros_like(o2)
     reaction = np.zeros_like(o2)
@@ -36,7 +34,6 @@ def test_oxygen_diffusion_smooths_gradient():
         )
     
     final_peak_diff = np.max(o2_next[10:22, 10:22]) - np.min(o2_next[10:22, 10:22])
-    # Peak difference in the test region must decrease as diffusion smooths it
     assert final_peak_diff < initial_peak_diff
     assert np.all(o2_next >= 0.0)
     assert np.all(o2_next <= 1.0)

@@ -51,7 +51,6 @@ def test_api_simulate():
 
 
 def test_api_invalid_input_rejected():
-    # Negative pressure should be rejected by Pydantic validation
     payload = {
         "gravity_g": 1.0,
         "oxygen_percent": 21.0,
@@ -126,12 +125,10 @@ def test_api_extinction():
 
 
 def test_api_static_assets_and_spa():
-    # Test index.html SPA root
     res_root = client.get("/")
     assert res_root.status_code == 200
     assert "ZeroG FLAMES" in res_root.text
 
-    # Test static assets
     res_css = client.get("/static/css/styles.css")
     assert res_css.status_code == 200
 

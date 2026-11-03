@@ -21,7 +21,6 @@ def test_live():
             assert resp.status == 200
             print(f"[PASS] {name}: {resp.status} OK ({len(content)} bytes)")
 
-    # Verify POST /api/simulate
     sim_payload = json.dumps({'gravity_g': 1.0, 'oxygen_percent': 21.0, 'fuel': 'methane'}).encode('utf-8')
     sim_req = urllib.request.Request(
         'http://127.0.0.1:8000/api/simulate',
@@ -34,7 +33,6 @@ def test_live():
         assert resp.status == 200
         print(f"[PASS] POST /api/simulate: Peak Temp = {data['metrics']['peak_temperature_k']} K, Status = {data['metrics']['flame_status']}, Frames = {len(data['frames'])}")
 
-    # Verify POST /api/compare
     comp_payload = json.dumps({
         'condition_a': {'gravity_g': 1.0},
         'condition_b': {'gravity_g': 0.0001}
@@ -50,7 +48,6 @@ def test_live():
         assert resp.status == 200
         print(f"[PASS] POST /api/compare: Earth vs Micro-g comparison successful")
 
-    # Verify POST /api/sweep
     sweep_payload = json.dumps({'fuel': 'methane'}).encode('utf-8')
     sweep_req = urllib.request.Request(
         'http://127.0.0.1:8000/api/sweep',
@@ -63,7 +60,6 @@ def test_live():
         assert resp.status == 200
         print(f"[PASS] POST /api/sweep: {len(data['points'])} gravity points evaluated")
 
-    # Verify POST /api/extinction
     ext_payload = json.dumps({'gravity_g': 0.0001, 'fuel': 'methane'}).encode('utf-8')
     ext_req = urllib.request.Request(
         'http://127.0.0.1:8000/api/extinction',
@@ -76,7 +72,6 @@ def test_live():
         assert resp.status == 200
         print(f"[PASS] POST /api/extinction: LOI mapped = {data['limiting_oxygen_index_percent']}% O2")
 
-    # Verify POST /api/ventilation
     vent_payload = json.dumps({'gravity_g': 0.0001, 'airflow_steps': [-0.5, 0.0, 0.5], 'fuel': 'methane'}).encode('utf-8')
     vent_req = urllib.request.Request(
         'http://127.0.0.1:8000/api/ventilation',

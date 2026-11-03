@@ -26,7 +26,7 @@ def test_no_fuel_yields_zero_reaction():
 def test_cold_temperature_prevents_reaction():
     fuel = np.full((10, 10), 0.5)
     o2 = np.full((10, 10), 0.23)
-    temp = np.full((10, 10), 295.0)  # Room temperature without ignition
+    temp = np.full((10, 10), 295.0)  
     
     rate = compute_reaction_rate(fuel, o2, temp)
     assert np.all(rate == 0.0)

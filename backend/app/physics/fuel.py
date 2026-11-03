@@ -23,7 +23,6 @@ def solve_fuel_transport(
     ny, nx = fuel_field.shape
     dx, dy = grid.dx, grid.dy
     
-    # 1. Molecular Diffusion
     d2_dx2 = np.zeros_like(fuel_field)
     d2_dy2 = np.zeros_like(fuel_field)
     
@@ -37,7 +36,6 @@ def solve_fuel_transport(
     
     diffusion_term = diffusivity * (d2_dx2 + d2_dy2)
     
-    # 2. Upwind Advection
     advection_x = np.zeros_like(fuel_field)
     u_pos = np.maximum(0.0, u_field)
     u_neg = np.minimum(0.0, u_field)
@@ -54,19 +52,14 @@ def solve_fuel_transport(
     
     advection_term = -(advection_x + advection_y)
     
-    # 3. Chemical Sink (Fuel consumption)
     consumption_term = -reaction_rate
     
-    # 4. Explicit update with timestep
     new_fuel = fuel_field + dt * (diffusion_term + advection_term + consumption_term)
     
-    # 5. Boundary conditions
-    # Fuel inlet at burner maintains continuous gaseous supply
     new_fuel[grid.burner_mask] = burner_fuel_fraction
     
-    # Open / zero fuel at chamber outer boundaries
     new_fuel[0, ~grid.burner_mask[0, :]] = 0.0
-    new_fuel[-1, :] = np.maximum(0.0, new_fuel[-2, :] * 0.95)  # Outflow top
+    new_fuel[-1, :] = np.maximum(0.0, new_fuel[-2, :] * 0.95)  
     new_fuel[:, 0] = 0.0
     new_fuel[:, -1] = 0.0
     

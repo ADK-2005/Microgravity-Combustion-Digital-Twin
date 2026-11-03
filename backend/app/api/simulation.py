@@ -76,7 +76,6 @@ async def compare_simulations(req: CompareRequest):
             duration_s=req.condition_b.duration_s,
         )
         
-        # Build comparative summary
         vel_a = res_a["metrics"]["max_velocity_ms"]
         vel_b = res_b["metrics"]["max_velocity_ms"]
         temp_a = res_a["metrics"]["peak_temperature_k"]

@@ -9,7 +9,7 @@ from backend.app.physics.buoyancy import compute_buoyancy_velocity_field
 def test_buoyancy_zero_at_zero_gravity():
     grid = SimulationGrid(nx=32, ny=32)
     temp = np.full((32, 32), 300.0)
-    temp[10:20, 14:18] = 1600.0  # Hot column
+    temp[10:20, 14:18] = 1600.0  
     
     u, v, b_strength = compute_buoyancy_velocity_field(
         temperature_field=temp,
@@ -19,7 +19,6 @@ def test_buoyancy_zero_at_zero_gravity():
         forced_airflow_ms=0.0,
     )
     
-    # At zero gravity without forced airflow, flow velocity must be zero
     assert b_strength == 0.0
     assert np.allclose(v, 0.0)
     assert np.allclose(u, 0.0)

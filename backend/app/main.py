@@ -17,7 +17,6 @@ app = FastAPI(
     version="1.0.0",
 )
 
-# Enable CORS for local development and client integration
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -26,7 +25,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Register API Routers
 app.include_router(simulation_router, prefix="/api", tags=["Simulation"])
 app.include_router(presets_router, prefix="/api", tags=["Presets & Data"])
 
@@ -41,7 +39,6 @@ async def health_check():
     }
 
 
-# Static files and Web UI serving
 STATIC_DIR = Path(__file__).resolve().parent.parent.parent / "static"
 
 if STATIC_DIR.exists():
